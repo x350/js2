@@ -31,5 +31,16 @@
       </div>
     </div>
   </section>
+  <script>
+    const element = document.getElementById('slider');
+    if (!element) { throw new Error('Нет такого id.'); }
+    const imagesArray  = ['airmax-jump.png', 'airmax-on-foot.png', 'airmax-playground.png', 'airmax-top-view.png', 'airmax.png'];
+    let iter = 0;
+    setInterval(() => {
+      if (iter >= imagesArray.length) { iter = 0; }
+      element.src = './i/' + imagesArray[iter];
+      iter++;
+    }, 5000);
+  </script>
 </body>
 </html>
