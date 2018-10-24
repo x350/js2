@@ -45,13 +45,11 @@
 
     nextButton.onclick = function() {   
       (currentIndex >= photoArray.length -1) ? currentIndex = 0 : ++currentIndex;
-      console.log(currentIndex);
       viewPhoto.src = './i/' + photoArray[currentIndex];      
     };
 
     prevButton.onclick = function() {  
       (currentIndex <= 0) ? currentIndex = photoArray.length - 1 : currentIndex--; 
-      console.log(currentIndex);
       viewPhoto.src = './i/' + photoArray[currentIndex];      
     };
   </script>
