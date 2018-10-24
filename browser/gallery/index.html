@@ -36,6 +36,7 @@
     </div>
   </article>
   <script>
+    'use strict';
     let nextButton = document.getElementById('nextPhoto');
     let prevButton = document.getElementById('prevPhoto');
     let currentIndex = 0;
@@ -44,12 +45,12 @@
     const viewPhoto = document.getElementById('currentPhoto');
 
     nextButton.onclick = function() {   
-      (currentIndex >= photoArray.length -1) ? currentIndex = 0 : ++currentIndex;
+      currentIndex >= (photoArray.length -1) ? currentIndex = 0 : ++currentIndex;
       viewPhoto.src = './i/' + photoArray[currentIndex];      
     };
 
     prevButton.onclick = function() {  
-      (currentIndex <= 0) ? currentIndex = photoArray.length - 1 : currentIndex--; 
+      currentIndex <= 0 ? currentIndex = photoArray.length - 1 : currentIndex--; 
       viewPhoto.src = './i/' + photoArray[currentIndex];      
     };
   </script>
