@@ -15,5 +15,25 @@
       <li><a href="#">Выйти</a></li>
     </ul>
   </div>
+
+<script>
+  const elements = document.getElementsByClassName('wrapper-dropdown::after');
+  console.log(elements);
+  function viewMenu() {
+    this.classList.toggle('active');
+  }
+  for (const item of elements) {
+    item.onclick = viewMenu;
+  }
+
+  const itemsMenu = document.getElementsByTagName('li');
+  function closeMenu() {
+    this.classList.remove('active');
+  }  
+
+  for (const item of itemsMenu) {
+    item.onclick = closeMenu;
+  }
+</script>
 </body>
 </html>
