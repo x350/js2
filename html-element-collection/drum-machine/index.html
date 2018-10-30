@@ -36,10 +36,11 @@
   </ul>
 
 <script>
+  'use strict';
   const drums = document.getElementsByClassName('drum-kit__drum');
   for (let drum of drums) {
     let item = drum.getElementsByTagName('audio')[0];
-    drum.onclick = () => { item.play(); }
+    drum.onclick = () => { item.play(); };
   }
 </script>
 </body>

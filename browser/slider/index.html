@@ -37,10 +37,11 @@
     if (!element) { throw new Error('Нет такого id.'); }
     const imagesArray  = ['airmax-jump.png', 'airmax-on-foot.png', 'airmax-playground.png', 'airmax-top-view.png', 'airmax.png'];
     let iter = 0;
+    element.src = './i/' + imagesArray[iter];
     setInterval(() => {
+      iter++;
       if (iter >= imagesArray.length) { iter = 0; }
       element.src = './i/' + imagesArray[iter];
-      iter++;
     }, 5000);
   </script>
 </body>

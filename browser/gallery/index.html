@@ -43,6 +43,7 @@
     const photoArray = ['breuer-building.jpg', 'headquarters.jpg', 'new-museum.jpg',
     'guggenheim-museum.jpg', 'IAC.jpg'];    
     const viewPhoto = document.getElementById('currentPhoto');
+    viewPhoto.src = './i/' + photoArray[currentIndex];
 
     nextButton.onclick = function() {   
       currentIndex >= (photoArray.length -1) ? currentIndex = 0 : ++currentIndex;

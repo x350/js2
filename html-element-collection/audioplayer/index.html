@@ -39,6 +39,7 @@
   	</div>
   </div>
 <script>
+  'use strict';
   const musicalCollection  = { 'LA Chill Tour' : 'https://netology-code.github.io/hj-homeworks/html-element-collection/audioplayer/mp3/LA%20Chill%20Tour.mp3', 'This is it band' : 'https://netology-code.github.io/hj-homeworks/html-element-collection/audioplayer/mp3/This%20is%20it%20band.mp3', 'LA Fusion Jam' : 'https://netology-code.github.io/hj-homeworks/html-element-collection/audioplayer/mp3/LA%20Fusion%20Jam.mp3' };
   const musicalNames = Object.keys(musicalCollection);
   let  musicalIndex = 0;
@@ -54,29 +55,26 @@
       player.play();
       vinil.classList.add('play');
     }
-  }
+  };
   document.getElementsByClassName('stop')[0].onclick = () => {
     player.pause();
     vinil.classList.remove('play');
     player.currentTime = 0;
-  }
+  };
 
   document.getElementsByClassName('back')[0].onclick = () => {
     vinil.classList.remove('play');
     musicalIndex <= 0 ? musicalIndex = musicalNames.length - 1 : musicalIndex--;
     musicTitle.title = musicalNames[musicalIndex];
     player.src = musicalCollection[musicalNames[musicalIndex]];
-  }
-
+  };
 
   document.getElementsByClassName('next')[0].onclick = () => {
     vinil.classList.remove('play');
     musicalIndex >= (musicalNames.length -1) ? musicalIndex = 0 : ++musicalIndex;
     musicTitle.title = musicalNames[musicalIndex];
     player.src = musicalCollection[musicalNames[musicalIndex]];
-  }
-
-
+  };
 </script>
 </body>
 </html>
