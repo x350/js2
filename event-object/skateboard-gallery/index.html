@@ -33,5 +33,21 @@
       <img src="images/thumb/07.jpg" title="EGGBEATER">
     </a>
   </nav>
+  <script>
+    const gallery = document.getElementById('nav');
+    const images = gallery.getElementsByTagName('a');
+    const viewImage = document.getElementById('view');
+    function takeHref(event) {
+      event.preventDefault();
+      let skateboard = event.currentTarget;
+      Array.from(images).forEach(image => image.classList.remove('gallery-current'));
+      skateboard.classList.add('gallery-current');
+      viewImage.src = skateboard.href;
+    }
+
+    Array.from(images).forEach(image => {
+      image.addEventListener('click', takeHref);
+    });
+  </script>
 </body>
 </html>
