@@ -45,5 +45,31 @@
       </svg>
     </div>
   </main>
+<script>
+  const viewNav = document.getElementsByTagName('nav')[0];
+  function hotKey(event) {
+    if (event.ctrlKey && event.altKey && event.code === 'KeyT') {
+      viewNav.classList.toggle('visible');
+    }
+  }
+  document.addEventListener('keydown', hotKey);
+
+  const secretElement = document.getElementsByClassName('secret')[0];
+  const code = [];
+  let counter = 0;
+  const secret = ['KeyY', 'KeyT', 'KeyN', 'KeyJ', 'KeyK', 'KeyJ', 'KeyU', 'KeyB', 'KeyZ'];
+  function secretCode(event) {
+    code[counter] = event.code;
+    if (code[counter] === secret[counter]) {
+      counter++;
+    } else {
+      counter = 0;
+    }
+    if (counter === 8) {
+      secretElement.classList.add('visible');
+    }  
+  }
+  document.addEventListener('keydown', secretCode); 
+</script>
 </body>
 </html>
