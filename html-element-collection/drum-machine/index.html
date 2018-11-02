@@ -40,7 +40,10 @@
   const drums = document.getElementsByClassName('drum-kit__drum');
   for (let drum of drums) {
     let item = drum.getElementsByTagName('audio')[0];
-    drum.onclick = () => { item.play(); };
+    drum.onclick = () => { 
+      item.currentTime = 0;
+      item.play(); 
+    };
   }
 </script>
 </body>
