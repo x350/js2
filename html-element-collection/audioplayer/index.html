@@ -63,17 +63,17 @@
   };
 
   document.getElementsByClassName('back')[0].onclick = () => {
-    vinil.classList.remove('play');
     musicalIndex <= 0 ? musicalIndex = musicalNames.length - 1 : musicalIndex--;
     musicTitle.title = musicalNames[musicalIndex];
     player.src = musicalCollection[musicalNames[musicalIndex]];
+    if(vinil.classList.contains('play')) { player.play(); }
   };
 
   document.getElementsByClassName('next')[0].onclick = () => {
-    vinil.classList.remove('play');
     musicalIndex >= (musicalNames.length -1) ? musicalIndex = 0 : ++musicalIndex;
     musicTitle.title = musicalNames[musicalIndex];
     player.src = musicalCollection[musicalNames[musicalIndex]];
+    if(vinil.classList.contains('play')) { player.play(); }
   };
 </script>
 </body>
