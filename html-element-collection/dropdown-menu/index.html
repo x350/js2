@@ -18,22 +18,11 @@
 
 <script>
   'use strict';
-  const elements = document.getElementsByClassName('wrapper-dropdown');
+  const element = document.getElementsByClassName('wrapper-dropdown')[0];
   function viewMenu() {
     this.classList.toggle('active');
   }
-  for (const item of elements) {
-    item.onclick = viewMenu;
-  }
-
-  const itemsMenu = document.getElementsByTagName('li');
-  function closeMenu() {
-    this.classList.remove('active');
-  }  
-
-  for (const item of itemsMenu) {
-    item.onclick = closeMenu;
-  }
+  element.onclick = viewMenu;
 </script>
 </body>
 </html>
