@@ -44,5 +44,17 @@
       </div>
     </div>
   </div>
+<script>
+  const products = document.getElementById('cart-count');
+  const totalPrice = document.getElementById('cart-total-price');
+  const buttonsToCart = document.getElementsByClassName('add fa fa-plus');
+  Array.from(buttonsToCart).forEach(item => item.addEventListener('click', addProduct));
+  function addProduct(event) {
+    products.innerHTML++;
+    totalPrice.innerHTML = getPriceFormatted(
+      Number(totalPrice.innerHTML.replace(' ', '')) 
+      + Number(event.currentTarget.dataset.price));
+  }
+</script>  
 </body>
 </html>
