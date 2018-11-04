@@ -27,5 +27,26 @@
       </ul>
     </div>
   </div>
+  <script>
+    const contacts = JSON.parse(loadContacts());
+    const contactsList  = document.getElementsByClassName('contacts-list')[0];
+
+    // Вариант № 1
+    contactsList.innerHTML = '';
+    contacts.forEach(item => { 
+      contactsList.innerHTML += `<li data-email="${item.email}" data-phone="${item.phone}"><strong>${item.name}</strong></li>`;      
+    });
+
+    // Вариант № 2
+    // const boxContact = document.querySelector('.contacts-list li');
+    // contactsList.removeChild(boxContact);
+    // contacts.forEach( item => {
+    //   let newContact = document.createElement('li');
+    //   newContact.innerHTML = `<strong>${item.name}</strong>`;
+    //   newContact.dataset.email = item.email;
+    //   newContact.dataset.phone = item.phone;      
+    //   contactsList.appendChild(newContact);
+    // });
+  </script>                                                               
 </body>
 </html>
