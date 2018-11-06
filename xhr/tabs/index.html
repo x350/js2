@@ -21,5 +21,30 @@
     </div>
     <div id="preloader" class="hidden">Загрузка...</div>
   </div>
+<script>
+  const ourLinks = document.querySelectorAll('.tabs a');
+  Array.from(ourLinks).forEach(item => item.addEventListener('click', viewTab));
+  function viewTab(event) {
+    event.preventDefault();
+    let request = new XMLHttpRequest();
+    request.open('GET', event.currentTarget.href, true);
+    request.addEventListener('load', onLoad);
+    request.addEventListener('error', onError);
+    request.send();
+    function onLoad() {
+      if (request.status !== 200) {
+        console.log(`Ответ ${request.status}: ${request.statusText}`);
+      } else {
+        document.getElementById('content').innerHTML = request.response;
+      }
+    }
+    function onError() {
+      console.log("Сетевая ошибка!");
+    }  
+    Array.from(ourLinks).forEach(item => item.classList.remove('active'));
+    event.currentTarget.classList.add('active'); 
+  }
+
+</script>
 </body>
 </html>
