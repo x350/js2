@@ -26,5 +26,33 @@
   </ul>
 
   <script src="js/built-in-ui.js"></script>
+  <script>
+    const request = new XMLHttpRequest();
+    request.open('GET', 'https://neto-api.herokuapp.com/book/');
+    request.addEventListener('load', onLoad);
+    request.addEventListener('error', onError);
+    function onLoad() {
+      if (request.status !== 200) {
+        console.log(`Ответ ${request.status}: ${request.statusText}`);
+      } else {
+        Array.from(JSON.parse(request.response)).forEach(book => addBookToCatalog(book));
+      }
+    }
+    function onError() {  console.log("Сетевая ошибка!"); }
+    request.send();
+
+    const catalog = document.getElementById('content');
+    catalog.innerHTML = '';
+
+    function addBookToCatalog(book) {
+      catalog.innerHTML += `<li 
+      data-title="${book.title}" 
+      data-author="${book.author.name}" 
+      data-info="${book.info}" 
+      data-price="${book.price}"">  
+        <img src="${book.cover.small}">
+      </li>`;
+    } 
+  </script>
 </body>
 </html>
