@@ -29,5 +29,29 @@
     </ul>
     <h3>Выполнено задач: <output></output></h3>
   </fieldset>
+  <script>
+    const tasks = document.getElementsByTagName('input');
+    console.log(tasks);
+    const commonTasks = 4;
+    let currentTasks = 0;
+    const outputInfo = document.getElementsByTagName('output')[0];
+    const listBlock = document.getElementsByClassName('list-block')[0];
+    Array.from(tasks).forEach(task => task.checked = false);
+
+    Array.from(tasks).forEach(task => task.addEventListener('click', taskReview));
+    function taskReview(event) {
+      if (event.currentTarget.checked) { 
+        currentTasks++; 
+      } else { currentTasks-- }
+      outputInfo.innerText = `${currentTasks} из ${commonTasks}`;
+      if (currentTasks === commonTasks) { 
+        listBlock.classList.add('complete'); 
+      } else {
+        if (listBlock.classList.contains('complete')) {
+          listBlock.classList.remove('complete');
+        }
+      }
+    }
+  </script>
 </body>
 </html>
