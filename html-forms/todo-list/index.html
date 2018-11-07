@@ -42,7 +42,7 @@
     function taskReview(event) {
       if (event.currentTarget.checked) { 
         currentTasks++; 
-      } else { currentTasks-- }
+      } else { currentTasks--; }
       outputInfo.innerText = `${currentTasks} из ${commonTasks}`;
       if (currentTasks === commonTasks) { 
         listBlock.classList.add('complete'); 
