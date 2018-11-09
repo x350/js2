@@ -93,5 +93,41 @@
   </main>
 
   <script src="https://use.fontawesome.com/70378a66b8.js"></script>
+  <script>
+	const ourForm = document.getElementsByClassName('contentform')[0];
+	const formElements = document.getElementsByClassName('form-group');
+	console.log(formElements);
+	formElements[5].addEventListener('keydown', event => { 
+		if(event.code.includes('Key')) { event.returnValue = false; }
+	});
+	const resultButtons = document.getElementsByClassName('button-contact');
+	const outputField = document.getElementById('output');
+
+	Array.from(formElements).forEach(item => item.addEventListener('change', checkFill));
+	function checkFill(event) {
+		for (let element of formElements) {
+			let fill = element.querySelector('input, textarea');
+			if (fill.value === '') { return }
+		}
+		resultButtons[0].disabled = false;
+	}
+
+	resultButtons[0].addEventListener('click', submitForm);
+	function submitForm(event) {		
+		
+		ourForm.classList.add('hidden');
+		resultButtons[0].disabled = true;
+		outputField.classList.remove('hidden');
+		console.log(ourForm.value);
+		// ourForm.submit();
+	}
+
+	// ourForm.addEventListener('submit', checkForm);
+	// function checkForm(event) {
+	// 	event.preventDefault();
+	// 	console.log(event);
+	// } 
+
+  </script>
 </body>
 </html>
