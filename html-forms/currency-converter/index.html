@@ -18,5 +18,40 @@
   </main>
 
   <div id="loader" class="hidden">Загрузка...</div>
+  <script>
+    document.getElementById('loader').classList.remove('hidden');
+    const selectFrom = document.getElementById('from');
+    const selectTo = document.getElementById('to');
+    const amount = document.getElementById('source');
+    const result = document.getElementById('result');
+    selectFrom.innerHTML = '';
+    selectTo.innerHTML = '';
+
+    const request = new XMLHttpRequest();
+    request.open('GET', 'https://neto-api.herokuapp.com/currency');
+    request.addEventListener('load', onLoad);
+    request.send();
+    function onLoad() {
+      const currency = JSON.parse(request.response);
+      currency.forEach(item => {
+        let tagOption = `<option value="${item.value}">${item.code}</option>`;
+        selectFrom.innerHTML += tagOption;
+        selectTo.innerHTML += tagOption;
+      });
+      document.getElementById('loader').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+      calculation();
+    }
+
+    function calculation() {
+      result.innerText = Math.round(Number(amount.value) * 
+        Number(selectFrom.selectedOptions[0].value) / 
+        Number(selectTo.selectedOptions[0].value) * 100) / 100;
+    }
+
+    amount.addEventListener('input', calculation);
+    selectFrom.addEventListener('change', calculation);
+    selectTo.addEventListener('change', calculation);    
+  </script>
 </body>
 </html>
