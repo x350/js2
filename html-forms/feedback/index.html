@@ -95,39 +95,49 @@
   <script src="https://use.fontawesome.com/70378a66b8.js"></script>
   <script>
 	const ourForm = document.getElementsByClassName('contentform')[0];
-	const formElements = document.getElementsByClassName('form-group');
-	console.log(formElements);
+	const formElements = document.querySelectorAll('input, textarea');
 	formElements[5].addEventListener('keydown', event => { 
 		if(event.code.includes('Key')) { event.returnValue = false; }
 	});
 	const resultButtons = document.getElementsByClassName('button-contact');
 	const outputField = document.getElementById('output');
 
-	Array.from(formElements).forEach(item => item.addEventListener('change', checkFill));
+	Array.from(formElements).forEach(item => {
+		item.addEventListener('change', checkFill);
+		item.addEventListener('blur', checkFill);
+	});
+	
 	function checkFill(event) {
+		resultButtons[0].disabled = true;
 		for (let element of formElements) {
-			let fill = element.querySelector('input, textarea');
-			if (fill.value === '') { return }
+			if (element.value === '') { return; }
 		}
 		resultButtons[0].disabled = false;
 	}
 
 	resultButtons[0].addEventListener('click', submitForm);
-	function submitForm(event) {		
-		
+	function submitForm(event) {
+		event.preventDefault();			
 		ourForm.classList.add('hidden');
 		resultButtons[0].disabled = true;
 		outputField.classList.remove('hidden');
-		console.log(ourForm.value);
-		// ourForm.submit();
+		document.getElementById('name').innerText = formElements[1].value;
+		document.getElementById('lastname').innerText = formElements[0].value;
+		document.getElementById('company').innerText = formElements[3].value;
+		document.getElementById('role').innerText = formElements[8].value;
+		document.getElementById('zip').innerText = formElements[5].value;
+		document.getElementById('city').innerText = formElements[6].value;
+		document.getElementById('address').innerText = formElements[4].value;
+		document.getElementById('subject').innerText = formElements[9].value;
+		document.getElementById('message').innerText = formElements[10].value;
 	}
 
-	// ourForm.addEventListener('submit', checkForm);
-	// function checkForm(event) {
-	// 	event.preventDefault();
-	// 	console.log(event);
-	// } 
-
+	resultButtons[1].addEventListener('click', returnToForm);
+	function returnToForm() {
+		outputField.classList.add('hidden');
+		ourForm.classList.remove('hidden');
+		resultButtons[0].disabled = false;
+	}
   </script>
 </body>
 </html>
