@@ -1,12 +1,7 @@
 'use strict';
 
-// function Slider(container) {
-// 	const next = container.querySelector('')
-// }
-
 const navigationButtons =  document.querySelector('.slider-nav').children;
 const slides = document.querySelector('.slides');
-
 slides.firstElementChild.classList.add('slide-current');
 document.querySelector('a[data-action=prev]').classList.add('disabled');
 document.querySelector('a[data-action=first]').classList.add('disabled');
@@ -74,7 +69,4 @@ function lastSlide(event) {
 	Array.from(navigationButtons).forEach(item => item.classList.remove('disabled'));
 	event.currentTarget.classList.add('disabled');
 	document.querySelector('a[data-action=next]').classList.add('disabled');
-
 }
-
-
