@@ -4,8 +4,7 @@ const counter = document.getElementById('counter');
 let count = localStorage.count ? localStorage.count : 0;
 counter.textContent = count;
 const buttonsBoard = document.querySelector('.wrap-btns');
-buttonsBoard.addEventListener('click', event => {
-	
+buttonsBoard.addEventListener('click', event => {	
 	if (event.target.id === 'increment') {
 		count++;
 	} else if ( event.target.id === 'decrement') {
