@@ -116,10 +116,8 @@ window.addEventListener('load', loadChoice);
 function loadChoice() {
 	const storage = getForm();
 	if (!storage) { return; }
-	const choiceSize = document.getElementById('sizeSwatch');
-	const choiceColor = document.getElementById('colorSwatch');
-	choiceColor.querySelector(`#swatch-1-${storage.color}`).checked = true;
-	choiceSize.querySelector(`#swatch-0-${storage.size}`).checked = true;
+	color.querySelector(`#swatch-1-${storage.color}`).checked = true;
+	size.querySelector(`#swatch-0-${storage.size}`).checked = true;
 }
 
 buttonCart.addEventListener('click', addToCart);
