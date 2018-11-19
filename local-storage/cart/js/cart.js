@@ -115,7 +115,7 @@ function fillSize(item) {
 
 sendRequest(urlList[0], fillColor);
 sendRequest(urlList[1], fillSize);
-loadChoice();
+window.addEventListener('load', loadChoice);
 
 function loadChoice() {
 	const storage = getForm();
@@ -196,7 +196,6 @@ window.addEventListener('beforeunload', saveSizeColor);
 function saveSizeColor(event) {
 	const order = document.getElementById('AddToCartForm');
 	const form = new FormData(order);
-	// form.append('productId', order.dataset.productId);
 	const storage = {};
 	for (let [key, value] of form) {
 		storage[key] = value;
