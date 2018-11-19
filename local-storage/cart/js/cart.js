@@ -120,9 +120,11 @@ loadChoice();
 function loadChoice() {
 	const storage = getForm();
 	if (!storage) { return; }
-	console.log(storage);
-	const choiceColor = color.querySelector(`input[value=${storage.color}]`);
-	const choiceSize = size.querySelector(`input[value=${storage.size}]`);
+	const cart = document.getElementById('quick-cart');
+	const size = document.getElementById('sizeSwatch');
+	const choiceColor = color.querySelector(`#swatch-1-${storage.color}`);
+	choiceColor.checked = true;
+	const choiceSize = size.querySelector(`#swatch-0-${storage.size}`);
 	choiceSize.checked = true;
 }
 
