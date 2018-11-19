@@ -7,7 +7,8 @@ const color = document.getElementById('colorSwatch');
 
 const urlList = ['https://neto-api.herokuapp.com/cart/colors', 
 				'https://neto-api.herokuapp.com/cart/sizes',
-				'https://neto-api.herokuapp.com/cart'];
+				'https://neto-api.herokuapp.com/cart',
+				'https://neto-api.herokuapp.com/cart/remove'];
 
 const snippetColor = `<div data-value="red" class="swatch-element color">
   <div class="tooltip">Красный</div>
@@ -30,7 +31,7 @@ const snippetSize = `<div data-value="s" class="swatch-element plain">
 size.insertAdjacentHTML('beforeEnd', snippetSize);
 const sizeNode = size.removeChild(size.lastElementChild);
 
-const snippetProduct = `<div class="quick-cart-product quick-cart-product-static" id="quick-cart-product-2721888517" style="opacity: 1;">
+const snippetProduct = `<div class="quick-cart-product quick-cart-product-static" id="quick-cart-product-" style="opacity: 1;">
   <div class="quick-cart-product-wrap">
     <img src="https://neto-api.herokuapp.com/hj/3.3/cart/product_1024x1024.png" title="Tony Hunfinger T-Shirt New York">
     <span class="s1" style="background-color: #000; opacity: .5">$800.00</span>
@@ -50,8 +51,8 @@ const snippetCart = `<a id="quick-cart-pay" quickbeam="cart-pay" class="cart-ico
 </a>`;
 cart.insertAdjacentHTML('beforeEnd', snippetCart);
 const cartNode = cart.querySelector('#quick-cart-pay');
-cartNode.classList.remove('open'); // реализовать загрузку из хранилища
-cartNode.querySelector('#quick-cart-price').textContent = '$0.00'; // загрузка цены
+cartNode.classList.remove('open'); 
+cartNode.querySelector('#quick-cart-price').textContent = '$0.00'; 
 
 // ----------------------------------- 
 
@@ -115,6 +116,16 @@ function fillSize(item) {
 sendRequest(urlList[0], fillColor);
 sendRequest(urlList[1], fillSize);
 
+loadChoice();
+function loadChoice() {
+	const storage = getForm();
+	if (!storage) { return; }
+	console.log(storage);
+	const choiceColor = color.querySelector(`input[value=${storage.color}]`);
+	const choiceSize = size.querySelector(`input[value=${storage.size}]`);
+	choiceSize.checked = true;
+}
+
 buttonCart.addEventListener('click', addToCart);
 function addToCart(event) {
 	event.preventDefault();
@@ -137,6 +148,7 @@ function fillProduct(item) {
 	currentNode.querySelector('.remove').dataset.if = item.id;
 	currentNode.querySelector('img').src = item.pic;
 	currentNode.querySelector('img').title = item.title;
+	currentNode.querySelector('.remove').addEventListener('click', removeProduct);
 	cart.insertBefore(currentNode, cartNode);
 	let price = Number(cartNode.querySelector('#quick-cart-price').textContent.slice(1));
 	price += item.price;
@@ -144,4 +156,50 @@ function fillProduct(item) {
 		cartNode.classList.add('open') ;
 	}	
 	cartNode.querySelector('#quick-cart-price').textContent = '$' + price;
+
+}
+
+function removeProduct(event) {	
+	console.log(event.target.dataset.id);
+	const form = new FormData();
+	form.append('productId', event.target.dataset.id);
+	const data  = {
+		body: form,
+		credentials: 'same-origin',
+		method: 'POST',	
+	};
+	sendRequest(urlList[3], deleteFromCard, data);
+}
+
+function deleteFromCard(item) {
+	const product = cart.querySelector('#quick-cart-product-' + item.productId);
+	product.parentNode.removeChild(product);
+	let price = Number(cartNode.querySelector('#quick-cart-price').textContent.slice(1));
+	price -= item.price;
+	if (price === 0) { 
+		cartNode.classList.remove('open') ;
+	}	
+	cartNode.querySelector('#quick-cart-price').textContent = '$' + price;	
+}
+
+function saveForm(storage) {
+	localStorage.storage = JSON.stringify(storage);
+}
+
+function getForm() {
+	try {
+		return JSON.parse(localStorage.storage);
+	} catch (er) { return null; }
+} 
+
+window.addEventListener('beforeunload', saveSizeColor);
+function saveSizeColor(event) {
+	const order = document.getElementById('AddToCartForm');
+	const form = new FormData(order);
+	// form.append('productId', order.dataset.productId);
+	const storage = {};
+	for (let [key, value] of form) {
+		storage[key] = value;
+	}
+	saveForm(storage);
 }
