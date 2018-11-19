@@ -60,15 +60,11 @@ function sendRequest(url,  fun, data = {}) {
 	fetch(url, data)
 	.then((res) => {
 		if (200 <= res.status && res.status < 300) { return res.json(); }
-		throw new Error(response.statusText);
+		throw new Error(res.statusText);
 	})
 	.then((res) => res.forEach(item => fun(item)))
 	.catch((error) => console.log(error));
 } 
-
-function getProductId() {
-	return document.getElementById('AddToCartForm').dataset.productId;
-}
 
 function insertNode(targetNode, node) {
 	targetNode.appendChild(node);
@@ -123,7 +119,7 @@ function loadChoice() {
 	const choiceSize = document.getElementById('sizeSwatch');
 	const choiceColor = document.getElementById('colorSwatch');
 	choiceColor.querySelector(`#swatch-1-${storage.color}`).checked = true;
-	choiceSize.querySelector(`#swatch-0-${storage.size}`).checked = true;;
+	choiceSize.querySelector(`#swatch-0-${storage.size}`).checked = true;
 }
 
 buttonCart.addEventListener('click', addToCart);
@@ -160,7 +156,6 @@ function fillProduct(item) {
 }
 
 function removeProduct(event) {	
-	console.log(event.target.dataset.id);
 	const form = new FormData();
 	form.append('productId', event.target.dataset.id);
 	const data  = {
