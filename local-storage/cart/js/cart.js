@@ -115,17 +115,15 @@ function fillSize(item) {
 
 sendRequest(urlList[0], fillColor);
 sendRequest(urlList[1], fillSize);
-
 loadChoice();
+
 function loadChoice() {
 	const storage = getForm();
 	if (!storage) { return; }
-	const cart = document.getElementById('quick-cart');
-	const size = document.getElementById('sizeSwatch');
-	const choiceColor = color.querySelector(`#swatch-1-${storage.color}`);
-	choiceColor.checked = true;
-	const choiceSize = size.querySelector(`#swatch-0-${storage.size}`);
-	choiceSize.checked = true;
+	const choiceSize = document.getElementById('sizeSwatch');
+	const choiceColor = document.getElementById('colorSwatch');
+	choiceColor.querySelector(`#swatch-1-${storage.color}`).checked = true;
+	choiceSize.querySelector(`#swatch-0-${storage.size}`).checked = true;;
 }
 
 buttonCart.addEventListener('click', addToCart);
