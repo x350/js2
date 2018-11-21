@@ -74,6 +74,17 @@ document.addEventListener('keypress', event => {
 	} else { sendMessage(); }
 })
 
+connection.addEventListener('error', error => console.log(`Ошибка ${error.data}`));
+
+connection.addEventListener('close', connectionClose);
+function connectionClose(event) {
+	status.textContent = status.dataset.offline;
+	sendButton.disabled = true;
+	const tempNode = templates[3].cloneNode(true);
+	tempNode.firstElementChild.textContent = "Пользователь не в сети.";
+	viewNewMessage.appendChild(tempNode);
+}
+
 function checkTime(i)
 {
 if (i<10) 
