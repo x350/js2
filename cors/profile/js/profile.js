@@ -1,8 +1,8 @@
 'use strict';
 
 const url = {};
-url.profile = 'https://neto-api.herokuapp.com/profile/me' + '?callback=getProfile',
-url.techno = 'https://neto-api.herokuapp.com/profile/:id/technologies' + '?callback=getTechno'
+url.profile = 'https://neto-api.herokuapp.com/profile/me' + '?callback=getProfile';
+url.techno = 'https://neto-api.herokuapp.com/profile/:id/technologies' + '?callback=getTechno';
 const insertTag = '<span class="devicons "></span>';
 const boxForTech = document.querySelector('[data-technologies]');
 boxForTech.insertAdjacentHTML('beforeEnd', insertTag);
@@ -22,7 +22,7 @@ function getTechno(data) {
 		const currentNode = insertNode.cloneNode(true);
 		currentNode.classList.add('devicons-' + item);
 		boxForTech.appendChild(currentNode);
-	})
+	});
 	document.querySelector('.content').style.display = 'initial';
 }
 
