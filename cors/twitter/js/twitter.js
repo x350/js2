@@ -10,6 +10,8 @@ function receiveData(data) {
 	document.querySelector('[data-followers]').textContent = data.followers;
 	document.querySelector('[data-following]').textContent = data.following;
 }
+
+// Вариант № 1
 // function addScript(url) {
 // 	const script = document.createElement("script");
 // 	script.src = url;
@@ -17,6 +19,8 @@ function receiveData(data) {
 // }
 // addScript(url);
 
+
+// Вариант № 2
 function loadData(url) {
 	return new Promise((done, fail) => {
 	    const script = document.createElement("script");
