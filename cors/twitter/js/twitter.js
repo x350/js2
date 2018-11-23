@@ -10,22 +10,18 @@ function receiveData(data) {
 	document.querySelector('[data-followers]').textContent = data.followers;
 	document.querySelector('[data-following]').textContent = data.following;
 }
+// function addScript(url) {
+// 	const script = document.createElement("script");
+// 	script.src = url;
+// 	document.body.appendChild(script);
+// }
+// addScript(url);
 
-function addScript(url) {
-	const script = document.createElement("script");
-	script.src = url;
-	document.body.appendChild(script);
-}
-addScript(url);
-
-// function loadData(url) {
-// 	return new Promise((done, fail) => {
-// 		window.receiveData = done;
-// 	    const script = document.createElement("script");
-// 	    script.type = "text/javascript";
-// 	    script.src = url;
-// 	    document.body.appendChild(script);
-// 	    console.log(window.receiveData);
-// 	    	});
-// }  
-// loadData(url).then(receiveData);
+function loadData(url) {
+	return new Promise((done, fail) => {
+	    const script = document.createElement("script");
+	    script.src = url;
+	    document.body.appendChild(script);
+	});
+}  
+loadData(url).then(receiveData).catch(err => console.log(err));
