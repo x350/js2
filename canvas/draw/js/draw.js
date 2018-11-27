@@ -16,17 +16,12 @@ ctx.lineCap = 'round';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 window.onresize = clearCanvas;
-
 canvas.addEventListener('mousemove', draw);
-
 canvas.addEventListener('mouseleave', event => {
 	stopDrow(event);
 	checkLeave = true;
-
 });
-
 canvas.addEventListener('dblclick', clearCanvas);
-
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mouseup', stopDrow);
 
