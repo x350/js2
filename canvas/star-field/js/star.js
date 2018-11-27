@@ -12,23 +12,31 @@ function random(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function sizeStar() {
+function randomSizeStar() {
 	let min = 0, max = 1.1;
 	min *= 10;
 	max *= 10;
 	return Math.floor((Math.random() * (max - min + 1) + min)) / 10;
 }
 
-function brightStar() {
+function randomColorStar() {
 	const bright = ['#ffffff', '#ffe9c4', '#d4fbff'];
 	return bright[random(0, 2)];
 }
 
+function randomBrightStar() {
+	let min = 0.8, max = 1;
+	min *= 10;
+	max *= 10;
+	return Math.floor((Math.random() * (max - min + 1) + min)) / 10;
+}
+
+
 function createRandomStar() {
-	const size = sizeStar();
+	const size = randomSizeStar();
+	ctx.fillStyle = randomColorStar();
+	ctx.globalAlpha = randomBrightStar();	
 	ctx.fillRect(random(0, width), random(0, height), size, size);
-	ctx.fillStyle = brightStar();
-	ctx.fill();
 }
 
 for (let x = 0; x < countStar; x++) {
