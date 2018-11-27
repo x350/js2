@@ -45,7 +45,6 @@ function draw(event) {
 	if (!isButtonPressed(1, event.buttons)) { return; }
 	if(checkLeave) { return; }
 	color = changeColor(color, event.shiftKey);
-
 	ctx.beginPath();
 	ctx.moveTo(pointX, pointY);
 	pointX = event.layerX;
