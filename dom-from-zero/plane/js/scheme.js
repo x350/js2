@@ -121,7 +121,7 @@ function getTemplateSix(rowNumber) {
 			]						
 		}
 		]
-	}
+	};
 }
 
 function getTemplateFour(rowNumber) {
@@ -195,7 +195,7 @@ function getTemplateFour(rowNumber) {
 			]						
 		}
 		]
-	}
+	};
 }
 
 function getTemplateNoSead(rowNumber) {
@@ -249,7 +249,7 @@ function getTemplateNoSead(rowNumber) {
 			]						
 		}
 		]
-	}
+	};
 }
 
 function browserJSEnj(block) {
@@ -263,7 +263,7 @@ function browserJSEnj(block) {
 		return block.reduce((f, elem) => {
 			f.appendChild(browserJSEnj(elem));
 			return f;
-		}, document.createDocumentFragment())
+		}, document.createDocumentFragment());
 	}
 	const element = document.createElement(block.tag || 'div');
 	element.classList.add(...[].concat(block.cls).filter(Boolean));
@@ -299,10 +299,12 @@ function addEventForSeat() {
 function changeStatusSeat(event) {
 	if (event.currentTarget.classList.contains('adult')) {
 		event.currentTarget.classList.remove('adult');
+		countTotalSeat();
 		return;
 	}
 	if (event.currentTarget.classList.contains('half')) {
 		event.currentTarget.classList.remove('half');
+		countTotalSeat();
 		return;		
 	}
 	if (event.altKey) {
@@ -310,29 +312,37 @@ function changeStatusSeat(event) {
 	} else {
 		event.currentTarget.classList.add('adult');
 	}
+	countTotalSeat();
+}
+
+function countTotalSeat() {
 	let adult = document.getElementsByClassName('adult').length;
 	let half = document.getElementsByClassName('half').length;
 	totalPax.textContent = adult + half;
 	totalAdult.textContent = adult;
-	totalHalf.textContent = half;
+	totalHalf.textContent = half;	
 }
 
 function setFullSeat(event) {
 	event.preventDefault();
 	const seats = document.getElementsByClassName('seat');
 	Array.from(seats).forEach(item => {
-		if ( !item.classList.contains('adult') || 
-			!item.classList.contains('half')) {
-			item.classList.add('adult')
+		if ( !item.classList.contains('adult')) {
+			if (!item.classList.contains('half')) {
+				item.classList.add('adult');
+			}
 		}
 	});
+	countTotalSeat();
 }
+
 function setEmptySeat(event) {
 	event.preventDefault();
 	Array.from(document.getElementsByClassName('adult'))
 		.forEach(item => item.classList.remove('adult'));
 	Array.from(document.getElementsByClassName('half'))
 		.forEach(item => item.classList.remove('half'));
+	countTotalSeat();
 }
 
 
