@@ -31,7 +31,6 @@ function randomBrightStar() {
 	return Math.floor((Math.random() * (max - min + 1) + min)) / 10;
 }
 
-
 function createRandomStar() {
 	const size = randomSizeStar();
 	ctx.fillStyle = randomColorStar();
@@ -39,7 +38,13 @@ function createRandomStar() {
 	ctx.fillRect(random(0, width), random(0, height), size, size);
 }
 
-for (let x = 0; x < countStar; x++) {
-	createRandomStar();	
+function loadPicture() {
+	ctx.clearRect(0, 0, width, height);
+	for (let x = 0; x < countStar; x++) {
+		createRandomStar();	
+	}	
 }
 
+canvas.addEventListener('click', loadPicture);
+document.addEventListener("DOMContentLoaded", loadPicture);
+// loadPicture();

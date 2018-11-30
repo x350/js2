@@ -20,8 +20,8 @@ timeFunction[1] = function nextPoint(x=this.x, y=this.y, time=new Date()) {
   return {
     x: x + Math.sin((x + (time / 10)) / 100) * 5,
     y: y + Math.sin((10 + x + (time / 10)) / 100) * 2
-  }
-}
+  };
+};
 
 const objectsArray = [];
 
@@ -83,7 +83,7 @@ class Cross extends Shape {
 		ctx.lineTo(x1 - this.side / 2, y1);
 		ctx.moveTo(x1, y1);
 		ctx.lineTo(x1 ,y1 - this.side / 2);
-		ctx.closePath();1
+		ctx.closePath();
 		ctx.stroke();
 		ctx.rotate(-1 * ang);
 		this.angle += this.speed;
