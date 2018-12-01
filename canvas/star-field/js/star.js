@@ -47,4 +47,3 @@ function loadPicture() {
 
 canvas.addEventListener('click', loadPicture);
 document.addEventListener("DOMContentLoaded", loadPicture);
-// loadPicture();
