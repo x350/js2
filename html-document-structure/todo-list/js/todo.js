@@ -7,7 +7,6 @@ Array.from(allTasks).forEach(item => item.addEventListener('click', changeStatus
 
 function changeStatus(event) {
 	let itemInput = event.target;
-	itemInput.children.checked = itemInput ? false : true;
 	 if (itemInput.checked) {
 	 	done.appendChild(itemInput.parentElement);
 	 } else {
