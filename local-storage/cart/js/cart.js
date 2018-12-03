@@ -63,7 +63,7 @@ function sendRequest(url,  fun, data = {}) {
 		throw new Error(res.statusText);
 	})
 	.then((res) => res.forEach(item => fun(item)))
-	.catch((error) => console.log(error));
+	.catch((error) => console.log(error.message));
 } 
 
 function insertNode(targetNode, node) {

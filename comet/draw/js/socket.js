@@ -13,4 +13,4 @@ window.editor.addEventListener('update', event => {
 
 connection.addEventListener('error', error => console.log(error.data));
 connection.addEventListener('close', event => console.log(event.code));
-window.addEventListener('beforeunload', connection.close(1000));
+// window.addEventListener('beforeunload', connection.close(1000));
