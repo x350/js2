@@ -1,4 +1,6 @@
 'use strict';
+var rws = null;
+
 
 const buttonCart = document.getElementById('AddToCart');
 const cart = document.getElementById('quick-cart');
@@ -59,11 +61,20 @@ cartNode.querySelector('#quick-cart-price').textContent = '$0.00';
 function sendRequest(url,  fun, data = {}) {
 	fetch(url, data)
 	.then((res) => {
-		if (200 <= res.status && res.status < 300) { return res.json(); }
+		if (200 <= res.status && res.status < 300) { 
+			return res.json(); 
+		}
 		throw new Error(res.statusText);
 	})
-	.then((res) => res.forEach(item => fun(item)))
-	.catch((error) => console.log(error.message));
+	.then((res) => {
+		if (res.length) {
+			res.forEach(fun);
+		} else {
+			fun({quantity: 0,
+				prise: 800})
+		}
+	})
+	.catch((error) => console.log(error));
 } 
 
 function insertNode(targetNode, node) {
@@ -111,6 +122,7 @@ function fillSize(item) {
 
 sendRequest(urlList[0], fillColor);
 sendRequest(urlList[1], fillSize);
+sendRequest(urlList[2], fillProduct);
 window.addEventListener('load', loadChoice);
 
 function loadChoice() {
@@ -135,6 +147,7 @@ function addToCart(event) {
 }
 
 function fillProduct(item) {
+	if (!item.quantity) { return; }
 	const currentNode = productNode.cloneNode(true);
 	currentNode.id += item.id;
 	currentNode.querySelector('.count').id += item.id;
@@ -143,9 +156,13 @@ function fillProduct(item) {
 	currentNode.querySelector('img').src = item.pic;
 	currentNode.querySelector('img').title = item.title;
 	currentNode.querySelector('.remove').addEventListener('click', removeProduct);
+	if (cart.firstElementChild.classList.contains('quick-cart-product-static')) {
+		cart.removeChild(cart.firstElementChild);
+	}
 	cart.insertBefore(currentNode, cartNode);
+
 	let price = Number(cartNode.querySelector('#quick-cart-price').textContent.slice(1));
-	price += item.price;
+	price = item.price * item.quantity;
 	if (price !== 0) { 
 		cartNode.classList.add('open') ;
 	}	
@@ -165,11 +182,17 @@ function removeProduct(event) {
 }
 
 function deleteFromCard(item) {
-	const product = cart.querySelector('#quick-cart-product-' + item.productId);
-	product.parentNode.removeChild(product);
+	const product = cart.querySelector('.quick-cart-product-static');
+	const count = item.quantity || 0;
+	if (count === 0) {
+		product.parentNode.removeChild(product);
+	} else {
+		product.querySelector('#quick-cart-product-count-' + item.productId)
+			.textContent = item.quantity;
+	}
 	let price = Number(cartNode.querySelector('#quick-cart-price').textContent.slice(1));
 	price -= item.price;
-	if (price === 0) { 
+	if (count <= 0) { 
 		cartNode.classList.remove('open') ;
 	}	
 	cartNode.querySelector('#quick-cart-price').textContent = '$' + price;	
