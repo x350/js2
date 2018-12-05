@@ -70,8 +70,7 @@ function sendRequest(url,  fun, data = {}) {
 		if (res.length) {
 			res.forEach(fun);
 		} else {
-			fun({quantity: 0,
-				prise: 800})
+			fun({quantity: 0})
 		}
 	})
 	.catch((error) => console.log(error));
