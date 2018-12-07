@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const trash = document.getElementById('trash_bin');
 let movedDocument = null;
