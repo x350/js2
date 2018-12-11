@@ -10,6 +10,7 @@ let pointY = 0;
 ctx.fillStyle = 'white';
 ctx.lineWidth = 10;
 let switchLine = true;
+let switchColor = true;
 let checkLeave = false;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
@@ -64,13 +65,37 @@ function clearCanvas() {
 function changeColor(hslColor, shiftKey) {
 	let color = Number(hslColor.split('(')[1].split(',')[0]);
 	if (shiftKey) { 
-		if (color <= 0) { 
-			color = 0;
-		} else { color--; }
+		if(switchColor) {
+				if (color >= 0) {
+				color--;
+			} else {
+				switchColor = false;
+				color++;
+			}
+		} else {
+			if (color <= 359) {
+				color++;
+			} else {
+				switchColor = true;
+				color--;
+			}
+		}
 	} else {
-		if (color >= 359) {
-			color = 359;
-		} else { color++; }
+		if(switchColor) {
+			if (color <= 359) {
+				color--;
+			} else {
+				switchColor = false;
+				color++;
+			}
+		} else {
+			if (color >= 0) {
+				color++;
+			} else {
+				switchColor = true;
+				color--;
+			}
+		}
 	}
 	return 'hsl(' + String(color) + ', 100%, 50%)';
 }
