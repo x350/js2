@@ -6,19 +6,17 @@ const right_eye = document.querySelector('.cat_position_for_right_eye');
 const left_pupil = document.querySelector('.cat_eye_left');
 const right_pupil = document.querySelector('.cat_eye_right');
 
-const Bounds = left_eye.getBoundingClientRect();
-
 document.addEventListener('mousemove', setBounds);
 
 function setBounds(event) {
 	event.preventDefault();
 	const leftBounds = left_eye.getBoundingClientRect();
-	const rightBounds = left_eye.getBoundingClientRect();
+	const rightBounds = right_eye.getBoundingClientRect();
 
-    let x = event.pageX - leftBounds.left - 70;
-    let y = event.pageY - leftBounds.top - 114;
-    let xx = event.pageX - rightBounds.left - 164;
-    let yy = event.pageY - rightBounds.top - 114;
+    let x = event.pageX - leftBounds.left;
+    let y = event.pageY - leftBounds.top;
+    let xx = event.pageX - rightBounds.left;
+    let yy = event.pageY - rightBounds.top;
 
     const minX = left_eye.offsetLeft + left_pupil.offsetWidth / 2 - 70;
 	const minY = left_eye.offsetTop + left_pupil.offsetHeight / 2 - 114;
